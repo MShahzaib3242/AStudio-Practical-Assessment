@@ -26,6 +26,9 @@ const headcells = [
   { id: "username", label: "User Name" },
   { id: "bloodGroup", label: "Blood Group" },
   { id: "eyeColor", label: "Eye Color" },
+  { id: "height", label: "Height" },
+  { id: "weight", label: "Weight" },
+  { id: "phone", label: "Phone" },
 ];
 
 const index = () => {
@@ -108,8 +111,23 @@ const index = () => {
     );
   };
 
+  const searchData = [
+    "First Name",
+    "Last Name",
+    "Maiden Name",
+    "Age",
+    "Gender",
+    "Email",
+    "Username",
+    "Blood Group",
+    "Eye Color",
+    "Height",
+    "Weight",
+    "Phone",
+  ];
+
   return (
-    <div className="container mx-auto p-4 h-screen flex flex-col gap-4">
+    <div className="container mx-auto p-4 h-screen flex flex-col gap-4 pt-8">
       <Heading title="Users Table" position="left" />
       <div className="flex items-center gap-4">
         <Select
@@ -140,39 +158,28 @@ const index = () => {
       </div>
       <div className="flex items-center gap-4">
         <ButtonGroup color="default" size="sm">
-          <Popover showArrow offset={10} placement="top">
-            <PopoverTrigger>
-              <Button endContent={<ArrowIcon />}>First Name</Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-[240px]">
-              {(titleProps) => (
-                <div className="px-1 py-2 w-full">
-                  <p
-                    className="text-small font-bold text-foreground"
-                    {...titleProps}
-                  >
-                    Search by First Name
-                  </p>
-                  <div className="mt-2 flex flex-col gap-2 w-full">
-                    <Input
-                      placeholder="First Name"
-                      size="sm"
-                      variant="bordered"
-                    />
+          {searchData.map((data) => (
+            <Popover showArrow offset={10} placement="top">
+              <PopoverTrigger>
+                <Button endContent={<ArrowIcon />}>{data}</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-[240px]">
+                {(titleProps) => (
+                  <div className="px-1 py-2 w-full">
+                    <p
+                      className="text-small font-bold text-foreground"
+                      {...titleProps}
+                    >
+                      Search by {data}
+                    </p>
+                    <div className="mt-2 flex flex-col gap-2 w-full">
+                      <Input placeholder={data} size="sm" variant="bordered" />
+                    </div>
                   </div>
-                </div>
-              )}
-            </PopoverContent>
-          </Popover>
-
-          <Button endContent={<ArrowIcon />}>Last Name</Button>
-          <Button endContent={<ArrowIcon />}>Maiden Name</Button>
-          <Button endContent={<ArrowIcon />}>Age</Button>
-          <Button endContent={<ArrowIcon />}>Gender</Button>
-          <Button endContent={<ArrowIcon />}>Email</Button>
-          <Button endContent={<ArrowIcon />}>Username</Button>
-          <Button endContent={<ArrowIcon />}>Blood Group</Button>
-          <Button endContent={<ArrowIcon />}>Eyecolor</Button>
+                )}
+              </PopoverContent>
+            </Popover>
+          ))}
         </ButtonGroup>
       </div>
       <Table

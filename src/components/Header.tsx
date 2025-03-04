@@ -5,7 +5,7 @@ const Header: React.FC = () => {
   const location = useLocation();
   console.log(location.pathname);
   return (
-    <header className="bg-white text-gray-800 sticky top-0 z-50 ">
+    <header className="bg-white text-gray-800 sticky top-0 z-50 shadow-lg">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 py-4 container">
         <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 sm:gap-8 text-center font-bold text-lg">
           <div className="flex items-center gap-4">
