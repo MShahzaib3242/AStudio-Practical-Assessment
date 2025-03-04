@@ -7,9 +7,10 @@ import { ReactComponent as PieIcon } from "../assets/svgs/hero/pie.svg";
 
 // PNG IMPORT
 import HuskyLogoIcon from "../assets/png/hero/huskyLogo.png";
+import AStudio from "../assets/png/astudio.png";
 
 // SVGS EXPORT
 export { FolderIcon, FileIcon, GraphIcon, LayoutIcon, PieIcon };
 
 // PNG EXPORT
-export { HuskyLogoIcon };
+export { HuskyLogoIcon, AStudio };
