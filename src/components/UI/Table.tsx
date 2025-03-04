@@ -1,4 +1,4 @@
-import Pagination from "./Pagination";
+// import Pagination from "./Pagination";
 import { Pagination as Pagination2 } from "@heroui/react";
 
 interface headcell {
@@ -22,7 +22,7 @@ const Table = ({
   headcells,
   itemsPerPage = 10,
   showPagination,
-  paginationPosition = "center",
+  // paginationPosition = "center",
   handlePage,
   total = 10,
   initialPage,
