@@ -32,6 +32,16 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "/users",
+        element: (
+          <Suspense fallback={<Loader />}>
+            {/* <ProtectedRoute> */}
+            <Home />
+            {/* </ProtectedRoute> */}
+          </Suspense>
+        ),
+      },
     ],
   },
 

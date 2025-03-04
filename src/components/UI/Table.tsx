@@ -1,4 +1,5 @@
 import Pagination from "./Pagination";
+import { Pagination as Pagination2 } from "@heroui/react";
 
 interface headcell {
   id: string;
@@ -31,9 +32,9 @@ const Table = ({
 
   return (
     <>
-      <div className="w-full overflow-x-auto">
-        <table className="min-w-full bg-white border rounded-lg overflow-hidden">
-          <thead className="bg-gray-200">
+      <div className="w-full overflow-x-auto text-xs md:text-sm text-primaryBlack">
+        <table className="min-w-full bg-white border border-primaryYellow rounded-lg overflow-hidden">
+          <thead className="bg-primaryYellow">
             <tr>
               {headcells?.map((header: headcell) => (
                 <th key={header.id} className="py-2 px-4 border text-nowrap">
@@ -44,7 +45,7 @@ const Table = ({
           </thead>
           <tbody>
             {data?.map((item: any, index: number) => (
-              <tr key={index} className="border-b hover:bg-gray-100">
+              <tr key={index} className="border-b hover:bg-primaryBlue/20">
                 {headcells.map((header: headcell) => (
                   <td key={header.id} className="py-2 px-4 border text-nowrap">
                     {item[header.id]}
@@ -55,15 +56,31 @@ const Table = ({
           </tbody>
         </table>
       </div>
+      {showPagination && data?.length > 0 && (
+        <div className="w-full flex justify-center">
+          <Pagination2
+            showControls
+            showShadow
+            initialPage={initialPage || 1}
+            total={totalPages}
+            variant={"faded"}
+            classNames={{
+              cursor: "bg-primaryYellow text-primaryBlack",
+            }}
+            onChange={handlePage}
+          />
+        </div>
+      )}
       {/* Pagination Controls */}
-      {showPagination && data.length > 0 && (
+
+      {/* {showPagination && data.length > 0 && (
         <Pagination
           position={paginationPosition}
           page={initialPage || 1}
           totalPages={totalPages}
           handlePage={handlePage}
         />
-      )}
+      )} */}
     </>
   );
 };

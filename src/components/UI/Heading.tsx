@@ -16,7 +16,11 @@ const Heading = ({ title, position = "center" }: HeadingProps) => {
   };
 
   return (
-    <h2 className={`text-2xl font-bold my-4 ${getPositionClass()}`}>{title}</h2>
+    <h2
+      className={`text-primaryBlack text-2xl font-bold ${getPositionClass()}`}
+    >
+      {title}
+    </h2>
   );
 };
 
