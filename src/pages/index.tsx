@@ -30,7 +30,7 @@ const Home = () => {
           </div>
         </div>
         <div className="w-1/2 hidden md:block">
-          <img src={Hero} alt="Hero Image" className="opacity-5" />
+          <img src={Hero} alt="Hero Image" />
         </div>
       </div>
     </section>
