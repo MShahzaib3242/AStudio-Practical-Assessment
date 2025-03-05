@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,9 +23,10 @@ const Users = () => {
   const [inputData, setInputData] = useState(inputDataInitialValue);
   const [searchValue, setSearchValue] = useState("");
 
-  const { getUsers } = useUsersActions();
+  const { getUsers, getAllUsers } = useUsersActions();
 
-  const { isUsersLoading, users, filteredUsers } = useSelector(selectUsers);
+  const { isUsersLoading, isAllUsersLoading, users, allUsers } =
+    useSelector(selectUsers);
 
   const handlePageChange = (page: number) => {
     const skipData = page * limit;
@@ -56,7 +58,7 @@ const Users = () => {
     } as typeof inputData);
 
     if (value.length > 0) {
-      getUsers({ key: id, value }, true);
+      getUsers({ key: id, value }, "filter");
     } else {
       setSearchValue("");
       getUsers({ limit: limit });
@@ -68,9 +70,9 @@ const Users = () => {
     setInputData(inputDataInitialValue);
     setPage(1);
 
-    if (!users?.users) return;
+    if (!allUsers?.users) return;
 
-    const filteredUsers = users.users.filter((user) =>
+    const filteredUsers = allUsers.users.filter((user) =>
       filterFields.some((field) =>
         String(user[field as keyof typeof user] || "")
           .toLowerCase()
@@ -81,7 +83,7 @@ const Users = () => {
     if (value.length > 0) {
       dispatch(
         setUsersSlice({
-          filteredUsers: {
+          users: {
             total: filteredUsers.length,
             skip: 0,
             limit: limit,
@@ -91,11 +93,7 @@ const Users = () => {
       );
     } else {
       setLimit(5);
-      dispatch(
-        setUsersSlice({
-          filteredUsers: users,
-        })
-      );
+      getUsers({ limit: limit });
     }
   };
 
@@ -103,7 +101,10 @@ const Users = () => {
     if (!isUsersLoading && !users) {
       getUsers({ limit: limit });
     }
-  }, [getUsers, isUsersLoading, limit, users]);
+    if (!isAllUsersLoading && !allUsers) {
+      getAllUsers({ limit: 0 });
+    }
+  }, []);
 
   return (
     <div className="container flex flex-col gap-4 p-4 pt-8 mx-auto h-custom">
@@ -124,10 +125,10 @@ const Users = () => {
       <Table
         showPagination
         headcells={headcells}
-        data={filteredUsers?.users}
+        data={users?.users}
         handlePageChange={handlePageChange}
         itemsPerPage={limit}
-        total={filteredUsers?.total}
+        total={users?.total}
         initialPage={page}
         paginationPosition="right"
         page={page}

@@ -7,7 +7,7 @@ import Header from "../components/Header";
 export default function Layout(): JSX.Element {
   return (
     <HeroUIProvider>
-      <section className="relative bg-gradient-to-tl from-primaryBlue to-primaryBlue/20">
+      <section className="relative bg-gradient-to-tl from-[#7FBDC0] via-primaryBlue to-primaryBlue/20">
         <Header />
         <Outlet />
         <Footer />

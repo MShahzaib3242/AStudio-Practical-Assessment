@@ -1,3 +1,6 @@
+import { ProductsFilters } from "../../types/products.types";
+import { UserFilters } from "../../types/users.types";
+
 export const filterFields = [
   "firstName",
   "lastName",
@@ -12,7 +15,10 @@ export const filterFields = [
   "phone",
 ];
 
-export const headcells = [
+export const headcells: {
+  id: keyof UserFilters | keyof ProductsFilters;
+  label: string;
+}[] = [
   { id: "firstName", label: "First Name" },
   { id: "lastName", label: "Last Name" },
   { id: "maidenName", label: "Maiden Name" },
@@ -39,4 +45,5 @@ export const inputDataInitialValue = {
   height: "",
   weight: "",
   phone: "",
+  age: "",
 };

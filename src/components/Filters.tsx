@@ -10,15 +10,22 @@ import {
 import { ArrowIcon } from "../assets";
 import { headcell } from "./UI/Table";
 import { UserFilters } from "../types/users.types";
+import { ProductsFilters } from "../types/products.types";
+
+type FilterData = UserFilters | ProductsFilters;
 
 interface Props {
-  inputData: UserFilters;
+  filterText?: string;
+  ShowText?: boolean;
+  inputData: FilterData;
   headcells: headcell[];
   handleReset: () => void;
-  handleChange: (value: string, id: keyof UserFilters) => void;
+  handleChange: (value: string, id: keyof FilterData) => void;
 }
 
 const Filters = ({
+  ShowText,
+  filterText,
   inputData,
   headcells,
   handleReset,
@@ -49,20 +56,24 @@ const Filters = ({
                   >
                     Search by {data.label}
                   </p>
-                  <div className="flex flex-col w-full gap-2 mt-2">
-                    <Input
-                      placeholder={data.label}
-                      size="sm"
-                      variant="bordered"
-                      value={inputData[data.id as keyof typeof inputData] || ""}
-                      onChange={(e) =>
-                        handleChange(
-                          e.target.value,
-                          data.id as keyof typeof inputData
-                        )
-                      }
-                    />
-                  </div>
+                  {ShowText ? (
+                    <span className="text-red-600">{filterText}</span>
+                  ) : (
+                    <div className="flex flex-col w-full gap-2 mt-2">
+                      <Input
+                        placeholder={data.label}
+                        size="sm"
+                        variant="bordered"
+                        value={inputData[data.id as keyof FilterData] || ""}
+                        onChange={(e) =>
+                          handleChange(
+                            e.target.value,
+                            data.id as keyof FilterData
+                          )
+                        }
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </PopoverContent>

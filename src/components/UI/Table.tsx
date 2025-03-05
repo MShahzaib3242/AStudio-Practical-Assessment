@@ -1,13 +1,15 @@
 import { Pagination, Skeleton } from "@heroui/react";
 import { UserFilters } from "../../types/users.types";
+import { ProductsFilters } from "../../types/products.types";
+import { Empty } from "../../assets";
 
 export interface headcell {
-  id: string;
+  id: keyof UserFilters | keyof ProductsFilters;
   label: string;
 }
 
 interface Props {
-  data: UserFilters[] | undefined;
+  data: UserFilters[] | ProductsFilters[] | undefined;
   headcells: headcell[];
   itemsPerPage: number;
   showPagination: boolean;
@@ -32,6 +34,12 @@ const Table = ({
 }: Props) => {
   const totalPages = Math.floor(total / itemsPerPage);
 
+  const isUserFilters = (
+    item: UserFilters | ProductsFilters
+  ): item is UserFilters => {
+    return "firstName" in item; // Adjust with a unique property from UserFilters
+  };
+
   return (
     <>
       <div className="w-full overflow-x-auto text-xs md:text-sm text-primaryBlack">
@@ -47,7 +55,7 @@ const Table = ({
           </thead>
           <tbody>
             {isLoading
-              ? Array.from({ length: 5 }, (_, index) => (
+              ? Array.from({ length: itemsPerPage }, (_, index) => (
                   <tr key={index} className="border-b hover:bg-primaryBlue/20">
                     {Array.from({ length: 11 }, (_, index1) => (
                       <td key={index1} className="px-4 py-2 border text-nowrap">
@@ -56,20 +64,35 @@ const Table = ({
                     ))}
                   </tr>
                 ))
-              : data?.map((item: UserFilters, index: number) => (
-                  <tr key={index} className="border-b hover:bg-primaryBlue/20">
-                    {headcells.map((header: headcell) => (
-                      <td
-                        key={header.id}
-                        className="px-4 py-2 border text-nowrap"
-                      >
-                        {item[header.id as keyof UserFilters]}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
+              : data?.length
+              ? data?.map(
+                  (item: UserFilters | ProductsFilters, index: number) => (
+                    <tr
+                      key={index}
+                      className="border-b hover:bg-primaryBlue/20"
+                    >
+                      {headcells.map((header: headcell) => (
+                        <td
+                          key={header.id}
+                          className="px-4 py-2 border text-nowrap"
+                        >
+                          {isUserFilters(item)
+                            ? String(item[header.id as keyof UserFilters])
+                            : String(item[header.id as keyof ProductsFilters])}
+                        </td>
+                      ))}
+                    </tr>
+                  )
+                )
+              : ""}
           </tbody>
         </table>
+        {!isLoading && !data?.length && (
+          <div className="flex flex-col items-center justify-center w-full gap-2 py-4 bg-white rounded-lg">
+            <img src={Empty} alt="Empty Image" className="w-20" />
+            No Records Found. Try to Type Full Name
+          </div>
+        )}
       </div>
 
       {/* Pagination Controls */}

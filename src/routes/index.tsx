@@ -8,6 +8,7 @@ import Layout from "../pages/Layout";
 import Error from "../pages/Error";
 import Home from "../pages/index";
 import Users from "../pages/Users";
+import Products from "../pages/Products";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <Users />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/products",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Products />
           </Suspense>
         ),
       },

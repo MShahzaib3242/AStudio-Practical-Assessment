@@ -1,30 +1,30 @@
 import { useDispatch } from "react-redux";
 
-import { setUsersSlice } from "./usersSice.ts";
-import { GET_USERS } from "../../utils/network/ApiEndpoints.ts";
+import { setProductsSlice } from "./productsSice.ts";
+import { GET_PRODUCTS } from "../../utils/network/ApiEndpoints.ts";
 import ApiRequest from "../../utils/network/ApiRequest.ts";
-import { filterProps } from "../../types/users.types.ts";
+import { filterProps } from "../../types/products.types.ts";
 
-export const useUsersActions = () => {
+export const useProductsActions = () => {
   const dispatch = useDispatch();
 
-  const getUsers = async (filters?: filterProps, filterText = "") => {
+  const getProducts = async (filters?: filterProps, filterText = "") => {
     dispatch(
-      setUsersSlice({
-        isUsersLoading: true,
+      setProductsSlice({
+        isProductsLoading: true,
       })
     );
     return await ApiRequest()
       .request({
         method: "GET",
-        url: `${GET_USERS}/${filterText}?`,
+        url: `${GET_PRODUCTS}/${filterText}?`,
         params: filters,
       })
       .then((response) => {
         const { data } = response;
         dispatch(
-          setUsersSlice({
-            users: data,
+          setProductsSlice({
+            products: data,
           })
         );
         return response;
@@ -34,30 +34,30 @@ export const useUsersActions = () => {
       })
       .finally(() => {
         dispatch(
-          setUsersSlice({
-            isUsersLoading: false,
+          setProductsSlice({
+            isProductsLoading: false,
           })
         );
       });
   };
 
-  const getAllUsers = async (filters?: filterProps) => {
+  const getAllProducts = async (filters?: filterProps) => {
     dispatch(
-      setUsersSlice({
-        isAllUsersLoading: true,
+      setProductsSlice({
+        isAllProductsLoading: true,
       })
     );
     return await ApiRequest()
       .request({
         method: "GET",
-        url: `${GET_USERS}`,
+        url: `${GET_PRODUCTS}`,
         params: filters,
       })
       .then((response) => {
         const { data } = response;
         dispatch(
-          setUsersSlice({
-            allUsers: data,
+          setProductsSlice({
+            allProducts: data,
           })
         );
         return response;
@@ -67,15 +67,15 @@ export const useUsersActions = () => {
       })
       .finally(() => {
         dispatch(
-          setUsersSlice({
-            isAllUsersLoading: false,
+          setProductsSlice({
+            isAllProductsLoading: false,
           })
         );
       });
   };
 
   return {
-    getUsers,
-    getAllUsers,
+    getProducts,
+    getAllProducts,
   };
 };

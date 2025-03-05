@@ -1,17 +1,18 @@
 export interface IUsersInitialState {
   users: {
-    users: [];
+    users: UserFilters[];
     total: number;
     skip: number;
     limit: number;
   } | null;
-  filteredUsers: {
-    users: [];
+  allUsers: {
+    users: UserFilters[];
     total: number;
     skip: number;
     limit: number;
   } | null;
   isUsersLoading: boolean;
+  isAllUsersLoading: boolean;
 }
 
 export interface filterProps {
@@ -25,6 +26,7 @@ export interface UserFilters {
   firstName: string;
   lastName: string;
   maidenName: string;
+  age: string;
   gender: string;
   email: string;
   username: string;
