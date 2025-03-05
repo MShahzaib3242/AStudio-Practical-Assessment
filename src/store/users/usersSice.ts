@@ -4,6 +4,7 @@ import { IUsersInitialState } from "../../types/users.types";
 
 const initialState: IUsersInitialState = {
   users: null,
+  filteredUsers: null,
   isUsersLoading: false,
 };
 export const USERS_SLICE_NAME = "users";

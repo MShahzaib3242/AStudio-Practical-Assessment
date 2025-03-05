@@ -1,7 +1,8 @@
 import { Outlet } from "react-router-dom";
+import { HeroUIProvider } from "@heroui/react";
+
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import { HeroUIProvider } from "@heroui/react";
 
 export default function Layout(): JSX.Element {
   return (

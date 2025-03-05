@@ -10,7 +10,7 @@ export default {
   theme: {
     extend: {
       height: {
-        custom: "calc(100vh - 72px)",
+        custom: "calc(100vh - 82.1px)",
       },
       colors: {
         primaryBlue: "#c0e3e5",
