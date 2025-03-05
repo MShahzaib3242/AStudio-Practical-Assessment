@@ -4,8 +4,8 @@ import { Hero } from "../assets";
 const Home = () => {
   return (
     <section className="flex items-center h-custom">
-      <div className="container flex items-center justify-between w-full px-8 mx-auto lg:flex">
-        <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left lg:w-1/2">
+      <div className="flex justify-between w-full items-center container px-8 mx-auto lg:flex">
+        <div className="flex flex-col gap-4 text-center items-center md:items-start md:text-left lg:w-1/2">
           <h1 className="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl">
             Welcome to the <span className="text-primaryYellow">AStudio</span>{" "}
             Practical Assessment
@@ -17,19 +17,19 @@ const Home = () => {
           <div className="flex items-center gap-4">
             <Link
               to={"/users"}
-              className="px-12 py-4 text-white transition-all rounded bg-primaryBlack hover:bg-primaryBlack/60"
+              className="px-12 py-4 text-white bg-primaryBlack rounded hover:bg-primaryBlack/60 transition-all"
             >
               View Users
             </Link>
             <Link
               to={"/products"}
-              className="px-12 py-4 transition-all rounded text-primaryBlack bg-primaryYellow hover:bg-primaryYellow/60"
+              className="px-12 py-4 text-primaryBlack bg-primaryYellow rounded hover:bg-primaryYellow/60 transition-all"
             >
               View Products
             </Link>
           </div>
         </div>
-        <div className="hidden w-1/2 md:block">
+        <div className="w-1/2 hidden md:block">
           <img src={Hero} alt="Hero Image" className="opacity-5" />
         </div>
       </div>

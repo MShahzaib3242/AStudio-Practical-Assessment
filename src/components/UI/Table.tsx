@@ -42,9 +42,9 @@ const Table = ({
 
   return (
     <>
-      <div className="w-full overflow-x-auto text-xs md:text-sm text-primaryBlack">
-        <table className="min-w-full overflow-hidden bg-white border rounded-lg border-primaryYellow">
-          <thead className="bg-primaryYellow">
+      <div className="w-full overflow-x-auto text-xs md:text-sm text-primaryBlack rounded smart-scroll">
+        <table className="min-w-full max-h-[500px] overflow-y-auto overflow-hidden bg-white border rounded-lg border-primaryYellow">
+          <thead className="bg-primaryYellow sticky -top-1 z-10">
             <tr>
               {headcells?.map((header: headcell) => (
                 <th key={header.id} className="px-4 py-2 border text-nowrap">
@@ -88,7 +88,7 @@ const Table = ({
           </tbody>
         </table>
         {!isLoading && !data?.length && (
-          <div className="flex flex-col items-center justify-center w-full gap-2 py-4 bg-white rounded-lg">
+          <div className="w-full py-4 flex flex-col gap-2 items-center justify-center bg-white rounded-lg">
             <img src={Empty} alt="Empty Image" className="w-20" />
             No Records Found. Try to Type Full Name
           </div>
